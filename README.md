@@ -66,7 +66,7 @@ WEATHER_API_KEY=your_openweathermap_api_key
 python app.py
 ```
 
-Then open your browser at: [Weather APP Link]([http://127.0.0.1:5000](https://weather-app-vmrd.onrender.com/))
+Then open your browser at: [Weather APP Link](https://weather-app-vmrd.onrender.com/)
 
 ---
 
