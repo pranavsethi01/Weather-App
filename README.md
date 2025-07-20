@@ -1,7 +1,5 @@
-# Weather-App
-Weather app for 5-day weather forecast, map display and export to CSV/JSON/Markdown.
 
-# Weather Forecast App – by Pranav Sethi
+# Weather Forecast App 
 
 A full-stack web application built for the **AI Engineer Intern Assessment** at PM Accelerator. This app retrieves real-time weather data, forecasts, and visual maps using external APIs. It supports data persistence and CRUD operations using a database, and allows users to export weather data in multiple formats.
 
@@ -77,7 +75,7 @@ Then open your browser at: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 ```
 ├── app.py               # Main Flask app
 ├── models.py            # DB model for saved weather queries
-├── templates/           # HTML templates (index, records)
+├── templates/           # HTML templates (index, records and update)
 ├── static/              # CSS styling
 ├── weather.db           # SQLite DB (auto-created)
 ├── .env                 # API keys (user-provided)
@@ -101,8 +99,8 @@ The app includes:
 * Full API integration
 * Basic to advanced CRUD features
 * Export and visual mapping tools
-* A link to [PM Accelerator on LinkedIn](https://www.linkedin.com/company/product-manager-accelerator/) included on the home page
+* A link to [PM Accelerator on LinkedIn]([https://www.linkedin.com/company/product-manager-accelerator/](https://www.linkedin.com/school/pmaccelerator/posts/?feedView=all)) included on the home page
 
 ---
-
+## Owner and created by Pranav Sethi
 
