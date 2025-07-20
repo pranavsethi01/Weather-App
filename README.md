@@ -19,9 +19,9 @@ A full-stack web application built for the **AI Engineer Intern Assessment** at 
 - **Update**: Modify saved queries
 - **Delete**: Remove saved records
 
-### Additional Functionalities
+### Functionalities
 - Export weather data in **JSON**, **CSV**, and **Markdown**
-- Responsive UI using custom CSS
+- Only work on Desktop
 - Input validation for both location and date ranges
 
 ---
