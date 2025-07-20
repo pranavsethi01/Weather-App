@@ -1,16 +1,10 @@
 # Weather-App
 Weather app for 5-day weather forecast, map display and export to CSV/JSON/Markdown.
 
-Sure! Here's an alternate version of the `README.md` — written in a more concise and professional tone, focusing on clarity, functionality, and alignment with the technical assessment requirements:
-
----
-
-````markdown
 # Weather Forecast App – by Pranav Sethi
 
 A full-stack web application built for the **AI Engineer Intern Assessment** at PM Accelerator. This app retrieves real-time weather data, forecasts, and visual maps using external APIs. It supports data persistence and CRUD operations using a database, and allows users to export weather data in multiple formats.
 
----
 
 ## Features Overview
 
