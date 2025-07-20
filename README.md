@@ -102,5 +102,5 @@ The app includes:
 * A link to [PM Accelerator on LinkedIn]([https://www.linkedin.com/company/product-manager-accelerator/](https://www.linkedin.com/school/pmaccelerator/posts/?feedView=all)) included on the home page
 
 ---
-## Owner and created by Pranav Sethi
+### Created by Pranav Sethi
 
