@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saved Weather Records</title>
+
+    <!-- Link to CSS file for consistent styling -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- Wrapper to center and style content -->
+    <div class="main-wrapper">
+    <h1>Saved Weather Records</h1>
+
+    <!-- Link to return to the main weather app page -->
+    <a href="/">Back to Weather App</a>
+    <br><br>
+
+    <!-- Export data section -->
+    <h3>Export Weather Data:</h3>
+
+<!-- Download JSON file -->
+<form action="/export/json" method="get" style="display:inline;">
+    <button type="submit">📄 Download JSON</button>
+</form>
+
+<!-- Download CSV file -->
+<form action="/export/csv" method="get" style="display:inline;">
+    <button type="submit">📊 Download CSV</button>
+</form>
+
+<!-- Download Markdown file -->
+<form action="/export/md" method="get" style="display:inline;">
+    <button type="submit">📝 Download Markdown</button>
+</form>
+
+    <br><br>
+
+    <!-- Loop through all weather records stored in the database -->
+    {% for rec in records %}
+        <div class="weather-card">
+            <strong>{{ rec.location }}</strong> ({{ rec.start_date }} -> {{ rec.end_date }})<br>
+
+            <!-- Links to edit or delete this record -->
+            <a href="{{ url_for('update', id=rec.id) }}">Edit</a> |
+            <a href="{{ url_for('delete', id=rec.id) }}">Delete</a>
+
+            <!-- Current weather details for the record -->
+            <div style="margin-top: 10px;">
+                <h3>{{ rec.parsed_data.weather.location }}</h3>
+                <img src="https://openweathermap.org/img/wn/{{ rec.parsed_data.weather.icon }}@2x.png" alt="weather icon">
+                <p>{{ rec.parsed_data.weather.temp }} °F | {{ rec.parsed_data.weather.description }}</p>
+                <p>Humidity: {{ rec.parsed_data.weather.humidity }}%</p>
+                <p>Wind: {{ rec.parsed_data.weather.wind }} m/s</p>
+            </div>
+
+            <!-- If forecast data exists, display forecast cards -->
+            {% if rec.parsed_data.forecast %}
+                <h4>Forecasted Days</h4>
+                <div class="forecast-grid">
+                    {% for day in rec.parsed_data.forecast %}
+                        <div class="forecast-card">
+                            <h3>{{ day.date }}</h3>
+                            <img src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="{{ day.description }}">
+                            <p><strong>{{ day.temp }}°F</strong></p>
+                            <p>{{ day.description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Weather Record</title>
+</head>
+<body>
+
+    <!-- Update form: sends POST request to the same route (/update/<id>) -->
+    <h1>Update Record</h1>
+    <form method="POST">
+
+        <!-- Pre-filled input for location, start date and end date-->
+        <input type="text" name="location" value="{{ record.location }}" required><br>
+        <input type="date" name="start_date" value="{{ record.start_date }}" required><br>
+        <input type="date" name="end_date" value="{{ record.end_date }}" required><br>
+
+        <!-- Submit button to save updated values -->
+        <button type="submit">Update</button>
+    </form>
+
+    <!-- Cancel link redirects user back to the saved records page -->
+    <a href="{{ url_for('records') }}">Cancel</a>
+</body>
+</html>
