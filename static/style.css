@@ -1,0 +1,92 @@
+
+/* Set base styles for the entire body of the page */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center fixed;
+    background-size: cover;
+    padding: 20px;
+    margin: 0;
+    color: #222;
+}
+
+/* Wrapper to center and style the main content area */
+.main-wrapper {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 16px;
+    padding: 30px 20px;
+    max-width: 1000px;
+    margin: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Style form input boxes and buttons */
+form input, form button {
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #999;
+    background-color: #fff;
+}
+
+/* Cards used for displaying current weather and forecast */
+.weather-card, .forecast-card {
+    background: #ffffff;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+/* Layout for forecast section using grid */
+.forecast-grid {
+    display: grid;
+    /* For responsive grid */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+    /* Spacing between cards */
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Scale card slightly when hovered */
+.forecast-card:hover {
+    transform: scale(1.03);
+    transition: transform 0.2s;
+}
+
+.forecast-card img {
+    width: 64px;
+    height: 64px;
+}
+/* Error messages style*/
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Styling embedded Google Maps iframe */
+iframe {
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling for button-like anchor links */
+a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+a.button:hover {
+    background-color: #3700b3;
+}
