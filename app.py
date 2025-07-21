@@ -148,13 +148,64 @@ def records():
 def update(id):
     record = WeatherRecord.query.get_or_404(id)
     if request.method == "POST":
-        record.location = request.form.get("location")
-        record.start_date = request.form.get("start_date")
-        record.end_date = request.form.get("end_date")
-        db.session.commit()
+        location = request.form.get("location")
+        start_date = request.form.get("start_date")
+        end_date = request.form.get("end_date")
+
+        start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
+        end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
+
+        # Determine which URL to call
+        if is_coordinates(location):
+            lat, lon = location.split(',')
+            weather_url = f"{BASE_URL}/weather?lat={lat.strip()}&lon={lon.strip()}&appid={API_KEY}"
+            forecast_url = f"{BASE_URL}/forecast?lat={lat.strip()}&lon={lon.strip()}&appid={API_KEY}"
+        elif is_zipcode(location):
+            weather_url = f"{BASE_URL}/weather?zip={location.strip()},us&appid={API_KEY}"
+            forecast_url = f"{BASE_URL}/forecast?zip={location.strip()},us&appid={API_KEY}"
+        else:
+            weather_url = f"{BASE_URL}/weather?q={location.strip()}&appid={API_KEY}"
+            forecast_url = f"{BASE_URL}/forecast?q={location.strip()}&appid={API_KEY}"
+
+        weather_res = requests.get(weather_url).json()
+        forecast_res = requests.get(forecast_url).json()
+
+        if weather_res.get("cod") == 200:
+            weather_data = {
+                "location": f"{weather_res['name']}, {weather_res['sys']['country']}",
+                "lat": weather_res["coord"]["lat"],
+                "lon": weather_res["coord"]["lon"],
+                "temp": kelvin_to_fahrenheit(weather_res["main"]["temp"]),
+                "description": weather_res["weather"][0]["description"].title(),
+                "humidity": weather_res["main"]["humidity"],
+                "wind": weather_res["wind"]["speed"],
+                "icon": weather_res["weather"][0]["icon"]
+            }
+
+            forecast_data = []
+            for entry in forecast_res.get("list", []):
+                if "12:00:00" in entry["dt_txt"]:
+                    date_str = entry["dt_txt"].split(" ")[0]
+                    forecast_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+                    if start_date_obj <= forecast_date <= end_date_obj:
+                        forecast_data.append({
+                            "date": date_str,
+                            "temp": kelvin_to_fahrenheit(entry["main"]["temp"]),
+                            "description": entry["weather"][0]["description"].title(),
+                            "icon": entry["weather"][0]["icon"]
+                        })
+
+            # Update fields and weather data
+            record.location = location
+            record.start_date = start_date
+            record.end_date = end_date
+            record.data = json.dumps({"weather": weather_data, "forecast": forecast_data})
+            db.session.commit()
+
         return redirect(url_for('records'))
 
     return render_template("update.html", record=record)
+
 
 # Deleting a saved record
 @app.route("/delete/<int:id>")
